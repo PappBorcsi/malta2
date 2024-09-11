@@ -120,7 +120,7 @@ class CustomDataset(Dataset):
         return img, target
 
     def __len__(self):
-        return 1
+        return 20
 
 # Kép megjelenítése dobozokkal
 def show_image_with_boxes(img, target):
