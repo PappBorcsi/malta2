@@ -125,29 +125,27 @@ def convert_to_coco_api(dataset):
     img, target = dataset[0]
     print(f"Image: {img}, Target: {target}")
     print(f"dataset's long: {len(dataset)}")
-    for img_id, (img, target) in enumerate(dataset):
-        # Ellenőrizd a target['boxes'] és target['labels'] típusát és tartalmát
-        print(f"Image ID: {img_id}")
-        print(f"Boxes: {target['boxes']}")
-        print(f"Labels: {target['labels']}")
-
-        print(dataset)
 
     for img_id, (img, target) in enumerate(dataset):
+        print(f"dataset's long: {len(dataset)}")
+
+        print("---")
+        print(img_id)
+        print(img)
+        print(target)
+
         if isinstance(img, torch.Tensor):
             # Ha az img nem PIL.Image, ne próbálkozzunk az img.size-al
             width, height = int(target['boxes'][0][2]), int(target['boxes'][0][3])
             print("set img ")
         else:
             width, height = img.size
-
         img_info = {
             'id': img_id,
             'width': width,
             'height': height,
         }
         coco_format.append(img_info)
-
         for box, label in zip(target['boxes'], target['labels']):
             coco_ann = {
                 'image_id': img_id,
@@ -159,7 +157,6 @@ def convert_to_coco_api(dataset):
             }
             coco_format.append(coco_ann)
         print("box end ")
-
     return coco_format
 
 
@@ -174,6 +171,8 @@ def get_coco_api_from_dataset(dataset):
         return dataset.coco
 
     print(dataset)
+    print("dataset")
+
     converted_coco = convert_to_coco_api(dataset)
     print("done")
     print(converted_coco)
