@@ -81,7 +81,7 @@ def evaluate(model, data_loader, device):
     metric_logger = utils.MetricLogger(delimiter="  ")
 
     header = "Test:"
-    print("test...")
+    print("test...!")
     coco = get_coco_api_from_dataset(data_loader.dataset)
     print("coco loader...")
 
